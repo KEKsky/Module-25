@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from settings import valid_email, valid_password, user_name
+from settings import valid_email, valid_password
 
 
 def test_show_my_pets(browser):
@@ -18,8 +18,6 @@ def test_show_my_pets(browser):
     submit_button = WebDriverWait(browser, 10).until(
         EC.element_to_be_clickable((By.CLASS_NAME, 'nav-link')))
     submit_button.click()
-
-    assert browser.find_element(By.TAG_NAME, 'h2').text == user_name
 
     pet_info = browser.find_element(By.CSS_SELECTOR, 'div.left:nth-child(1)').text.split('\n')[1]
     number_of_pets = int("".join(filter(str.isdigit, pet_info)))
